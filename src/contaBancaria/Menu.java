@@ -2,18 +2,45 @@ package contaBancaria;
 
 import java.util.Scanner;
 import contaBancaria.util.Cores;
+import contaBancaria.model.contaBancaria;
+import contaBancaria.model.ContaCorrente;
+import contaBancaria.model.ContaPoupanca;
 
 public class Menu {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		//Teste da Classe contaBancaria
+		contaBancaria c1 = new contaBancaria(1,123,1,"Isabella", 10000.0f);
+		c1.visualizar();
+		c1.sacar(12000.0f);
+		c1.visualizar();
+		c1.depositar(5000.0f);
+		c1.visualizar();
 		
+		//Teste da Classe Conta Corrente
+		ContaCorrente cc1 = new ContaCorrente(2,123,1,"Bento", 15000.0f, 10000.0f);
+		cc1.visualizar();
+		cc1.sacar(12000.0f);
+		cc1.visualizar();
+		cc1.depositar(5000.0f);
+		cc1.visualizar();
+		
+		//Teste da Classe Conta Poupanca
+		ContaPoupanca cp1 = new ContaPoupanca(3,123,2,"Oliveira", 100000.0f,15);
+		cp1.visualizar();
+		cp1.sacar(1000.0f);
+		cp1.visualizar();
+		cp1.depositar(5000.0f);
+		cp1.visualizar();
+				
 		Scanner leia = new Scanner(System.in);
+		
 		int opcao;
 		
 		while(true) {
 
-			System.out.println(Cores.TEXT_YELLOW + Cores.ANSI_BLACK_BACKGROUND
+			System.out.println(Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND
 					+ "*****************************************************");
 			System.out.println("                                                     ");
 			System.out.println("                BANCO DO BRAZIL COM Z                ");
@@ -77,7 +104,7 @@ public class Menu {
                     		break;
 				default:
 					System.out.println(Cores.TEXT_RED_BOLD + "\nOpção Inválida!\n" + Cores.TEXT_RESET);
-                    		break;
+                break;
 			}
 		}	
     }
