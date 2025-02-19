@@ -2,7 +2,7 @@ package contaBancaria.model;
 
 public abstract class contaBancaria {
 
-	private int numero;
+	private static int numero;
 	private int agencia;
 	private int tipo;
 	private String titular;
@@ -16,7 +16,7 @@ public abstract class contaBancaria {
 		this.saldo = saldo;
 	}
 	
-	public int getNumero() {
+	public static int getNumero() {
 		return numero;
 	}
 	
@@ -82,7 +82,7 @@ public abstract class contaBancaria {
 			tipo = "Conta Corrente";
 		break;
 		case 2:
-			tipo = "Conta Poupança";
+			tipo = "Conta Poupanca";
 		break;
 		}
 		

@@ -12,7 +12,12 @@ public class contaController implements ContaRepository {
 	
 	@Override
 	public void procurarPorNumero(int numero) {
-		// TODO Auto-generated method stub
+		var contaBancaria = buscarNaCollection(numero);
+		
+		if(contaBancaria != null)
+			contaBancaria.visualizar();
+		else
+			System.out.println("\nA conta número: " + numero + " não foi encontrada!");
 		
 	}
 
@@ -21,45 +26,91 @@ public class contaController implements ContaRepository {
 		for (var contaBancaria : listaContas) {
 			contaBancaria.visualizar();
 			}
+	}
+
+	@Override
+	public void cadastrar(contaBancaria contas) {
+		listaContas.add(contas);
+		System.out.println("\nA Conta número: " + contas.getNumero() + " foi criada com sucesso!");
+	}
+
+	@Override
+	public void atualizar(contaBancaria contas) {
+		var buscarcontaBancaria = buscarNaCollection(contaBancaria.getNumero());
 		
-	}
-
-	@Override
-	public void cadastrar(contaBancaria conta) {
-		listaContas.add(conta);
-		System.out.println("\nA Conta número: " + conta.getNumero() + "foi criada com sucesso!");
-	}
-
-	@Override
-	public void atualizar(contaBancaria conta) {
-		// TODO Auto-generated method stub
+		if(buscarcontaBancaria != null) {
+			listaContas.set(listaContas.indexOf(buscarcontaBancaria), contas);
+			System.out.println("\nA conta númeroo: " + contaBancaria.getNumero() + " foi atualizada com sucesso!");
+		} else
+			System.out.println("\nA conta número: " + contaBancaria.getNumero() + " não foi encontrada!");
 		
 	}
 
 	@Override
 	public void deletar(int numero) {
-		// TODO Auto-generated method stub
+		var contaBancaria = buscarNaCollection (numero);
 		
-	}
+		if (contaBancaria != null) {
+			if (listaContas.remove(contaBancaria) == true);
+			System.out.println("\nA conta número: " + numero + " foi deletada com sucesso!");
+		} else
+			System.out.println("\nA conta número: " + numero + " não foi encontrada!");
+		}
+		
 
 	@Override
 	public void sacar(int numero, float valor) {
-		// TODO Auto-generated method stub
+		var contaBancaria = buscarNaCollection(numero);
 		
-	}
+		if (contaBancaria != null) {
+			if(contaBancaria.sacar(valor) == true)
+				System.out.println("\nO saque na conta número: " + numero + " foi efetuado com sucesso!");
+		} else
+			System.out.println("\nA conta número: " + numero + " não foi encontrada!");
+		}
+		
+	
 
 	@Override
 	public void depositar(int numero, float valor) {
-		// TODO Auto-generated method stub
+		var contaBancaria = buscarNaCollection(numero);
+		
+		if(contaBancaria != null) {
+			contaBancaria.depositar(valor);
+			System.out.println("\nO depósito na conta número: " + numero + " foi efetuado com sucesso!");
+		} else
+			System.out.println("\nA conta número: " + numero + " não foi encontrada ou a conta destino não é uma conta corrente!");
 		
 	}
 
 	@Override
 	public void transferir(int numeroOrigem, int numeroDestino, float valor) {
-		// TODO Auto-generated method stub
+		var contaOrigem = buscarNaCollection(numeroOrigem);
+		var contaDestino = buscarNaCollection(numeroDestino);
+		
+		if (contaOrigem != null && contaDestino != null ) {
+			
+			if (contaOrigem.sacar(valor) == true) {
+				contaDestino.depositar(valor);
+				System.out.println("\nA transferência foi efetuada com sucesso!");
+			}
+		} else
+			System.out.println("\nA conta de origem e/ou destino não foram encontradas!");
 		
 	}
 	public int gerarNumero() {
 		return ++ numero;
 	}
+
+
+	public contaBancaria buscarNaCollection(int numero) {
+		for (var contaBancaria : listaContas) {
+			if (contaBancaria.getNumero() == numero) {
+				return contaBancaria;
+			}
+		}
+		return null;
+	}
 }
+
+
