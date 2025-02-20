@@ -10,6 +10,10 @@ public class contaController implements ContaRepository {
 	private ArrayList<contaBancaria> listaContas = new ArrayList<contaBancaria>();
 	int numero = 0;
 	
+	public int gerarNumero() {
+		return ++ numero;
+	}
+	
 	@Override
 	public void procurarPorNumero(int numero) {
 		var contaBancaria = buscarNaCollection(numero);
@@ -36,13 +40,13 @@ public class contaController implements ContaRepository {
 
 	@Override
 	public void atualizar(contaBancaria contas) {
-		var buscarcontaBancaria = buscarNaCollection(contaBancaria.getNumero());
+		var buscarcontaBancaria = buscarNaCollection(contas.getNumero());
 		
 		if(buscarcontaBancaria != null) {
 			listaContas.set(listaContas.indexOf(buscarcontaBancaria), contas);
-			System.out.println("\nA conta númeroo: " + contaBancaria.getNumero() + " foi atualizada com sucesso!");
+			System.out.println("\nA conta númeroo: " + contas.getNumero() + " foi atualizada com sucesso!");
 		} else
-			System.out.println("\nA conta número: " + contaBancaria.getNumero() + " não foi encontrada!");
+			System.out.println("\nA conta número: " + contas.getNumero() + " não foi encontrada!");
 		
 	}
 
@@ -97,9 +101,6 @@ public class contaController implements ContaRepository {
 		} else
 			System.out.println("\nA conta de origem e/ou destino não foram encontradas!");
 		
-	}
-	public int gerarNumero() {
-		return ++ numero;
 	}
 
 
